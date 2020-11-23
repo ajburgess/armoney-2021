@@ -1,11 +1,9 @@
+const setupMongoose = require('./setup-mongoose');
 const expect = require('expect');
-const setup = require('./mongoose-setup');
+const {Account, Transaction} = require('../src/models/model');
 
 describe('Transaction', function() {
-  let Account; let Transaction;
-  let account1;
-
-  setup((model) => ({Account, Transaction} = model));
+  setupMongoose();
 
   beforeEach(async function() {
     account1 = await Account.create({name: 'Account 1', balance: 500.00});

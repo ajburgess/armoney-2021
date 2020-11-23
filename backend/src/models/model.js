@@ -1,9 +1,9 @@
+const mongoose = require('mongoose');
+
 const AccountSchema = require('./account-schema');
 const TransactionSchema = require('./transaction-schema');
 
-module.exports = function(connection) {
-  return {
-    Account: connection.model('Account', AccountSchema),
-    Transaction: connection.model('Transaction', TransactionSchema),
-  };
+module.exports = {
+  Account: mongoose.model('Account', AccountSchema),
+  Transaction: mongoose.model('Transaction', TransactionSchema),
 };

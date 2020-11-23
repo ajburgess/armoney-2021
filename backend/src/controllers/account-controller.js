@@ -1,6 +1,6 @@
 const {Account} = require('../models/model');
 
-exports.index = async (req, res, next) => {
+exports.list = async (req, res, next) => {
   try {
     const accounts = await Account.find();
     res.send(accounts);
@@ -17,6 +17,20 @@ exports.read = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
+    res.send(account);
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.create = async (req, res, next) => {
+  try {
+    let account = new Account({
+      name: req.body.name,
+      balance: req.body.balance,
+      openingDate: req.body.date,
+    });
+    account = await Account.create(account);
     res.send(account);
   } catch (err) {
     next(err);
