@@ -25,12 +25,11 @@ exports.read = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    let account = new Account({
+    const account = await Account.create({
       name: req.body.name,
       balance: req.body.balance,
       openingDate: req.body.date,
     });
-    account = await Account.create(account);
     res.send(account);
   } catch (err) {
     next(err);
